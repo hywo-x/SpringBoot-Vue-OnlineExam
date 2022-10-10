@@ -1,20 +1,16 @@
-
-SET NAMES utf8mb4;
-SET FOREIGN_KEY_CHECKS = 0;
-
 -- ----------------------------
 -- Table structure for admin
 -- ----------------------------
 DROP TABLE IF EXISTS admin;
 CREATE TABLE admin  (
-  adminId int(9) NOT NULL AUTO_INCREMENT COMMENT 'ID号',
-  adminName varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '姓名',
-  sex varchar(2) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '性别',
-  tel varchar(11) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '电话号码',
-  email varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '电子邮箱',
-  pwd varchar(16) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '密码',
-  cardId varchar(18) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '身份证号',
-  role varchar(1) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '角色(0管理员，1教师，2学生)',
+  adminId SERIAL NOT NULL,
+  adminName VARCHAR(20) NULL DEFAULT NULL,
+  sex VARCHAR(2)  NULL DEFAULT NULL,
+  tel varchar(11) NULL DEFAULT NULL,
+  email varchar(20) NULL DEFAULT NULL,
+  pwd varchar(16) NULL DEFAULT NULL,
+  cardId varchar(18) NULL DEFAULT NULL,
+  role varchar(1) NULL DEFAULT NULL,
   PRIMARY KEY (adminId) USING BTREE,
   INDEX KEY (sex) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 9528 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '管理员信息表' ROW_FORMAT = Dynamic;
@@ -29,19 +25,19 @@ INSERT INTO admin VALUES (9527, '超级管理员', '男', '13658377857', '125383
 -- ----------------------------
 DROP TABLE IF EXISTS exam_manage;
 CREATE TABLE exam_manage  (
-  examCode int(9) NOT NULL AUTO_INCREMENT COMMENT '考试编号',
-  description varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '该次考试介绍',
-  source varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '课程名称',
-  paperId int(10) NULL DEFAULT NULL COMMENT '试卷编号',
-  examDate varchar(10) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '考试日期',
-  totalTime int(3) NULL DEFAULT NULL COMMENT '持续时长',
-  grade varchar(10) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '年级',
-  term varchar(10) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '学期',
-  major varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '专业',
-  institute varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '学院',
-  totalScore int(4) NULL DEFAULT NULL COMMENT '总分',
-  type varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '考试类型',
-  tips varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '考生须知',
+  examCode int(9) NOT NULL AUTO_INCREMENT,
+  description varchar(50) NULL DEFAULT NULL,
+  source varchar(20) NULL DEFAULT NULL,
+  paperId int(10) NULL DEFAULT NULL,
+  examDate varchar(10) NULL DEFAULT NULL,
+  totalTime int(3) NULL DEFAULT NULL,
+  grade varchar(10) NULL DEFAULT NULL,
+  term varchar(10) NULL DEFAULT NULL,
+  major varchar(20) NULL DEFAULT NULL,
+  institute varchar(20) NULL DEFAULT NULL,
+  totalScore int(4) NULL DEFAULT NULL,
+  type varchar(255) NULL DEFAULT NULL,
+  tips varchar(255) NULL DEFAULT NULL,
   PRIMARY KEY (examCode) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 20190014 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '考试管理表' ROW_FORMAT = Dynamic;
 
@@ -63,14 +59,14 @@ INSERT INTO exam_manage VALUES (20190013, '测试', '测试', 1009, '2019-04-24'
 -- ----------------------------
 DROP TABLE IF EXISTS fill_question;
 CREATE TABLE fill_question  (
-  questionId int(9) NOT NULL AUTO_INCREMENT COMMENT '试题编号',
-  subject varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '考试科目',
-  question varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '试题内容',
-  answer varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '正确答案',
-  analysis varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '题目解析',
-  score int(2) NULL DEFAULT 2 COMMENT '分数',
-  level varchar(5) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '难度等级',
-  section varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '所属章节',
+  questionId int(9) NOT NULL AUTO_INCREMENT,
+  subject varchar(20) NULL DEFAULT NULL,
+  question varchar(255) NULL DEFAULT NULL,
+  answer varchar(255) NULL DEFAULT NULL,
+  analysis varchar(255) NULL DEFAULT NULL,
+  score int(2) NULL DEFAULT 2,
+  level varchar(5) NULL DEFAULT NULL,
+  section varchar(20) NULL DEFAULT NULL,
   PRIMARY KEY (questionId) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 10029 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '填空题题库' ROW_FORMAT = Dynamic;
 
@@ -112,14 +108,14 @@ INSERT INTO fill_question VALUES (10028, '计算机网络', '数字调制的三�
 -- ----------------------------
 DROP TABLE IF EXISTS judge_question;
 CREATE TABLE judge_question  (
-  questionId int(9) NOT NULL AUTO_INCREMENT COMMENT '试题编号',
-  subject varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '考试科目',
-  question varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '试题内容',
-  answer varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '正确答案',
-  analysis varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '题目解析',
-  score int(2) NULL DEFAULT 2 COMMENT '分数',
-  level varchar(1) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '难度等级',
-  section varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '所属章节',
+  questionId int(9) NOT NULL AUTO_INCREMENT,
+  subject varchar(20) NULL DEFAULT NULL,
+  question varchar(255) NULL DEFAULT NULL,
+  answer varchar(255) NULL DEFAULT NULL,
+  analysis varchar(255) NULL DEFAULT NULL,
+  score int(2) NULL DEFAULT 2,
+  level varchar(1) NULL DEFAULT NULL,
+  section varchar(20) NULL DEFAULT NULL,
   PRIMARY KEY (questionId) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 10013 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '判断题题库表' ROW_FORMAT = Dynamic;
 
@@ -144,10 +140,10 @@ INSERT INTO judge_question VALUES (10012, '计算机网络', 'INTERNET上向朋�
 -- ----------------------------
 DROP TABLE IF EXISTS message;
 CREATE TABLE message  (
-  id int(9) NOT NULL AUTO_INCREMENT COMMENT '留言编号',
-  title varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '标题',
-  content varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '留言内容',
-  time date NULL DEFAULT NULL COMMENT '留言时间',
+  id int(9) NOT NULL AUTO_INCREMENT,
+  title varchar(20) NULL DEFAULT NULL,
+  content varchar(255) NULL DEFAULT NULL,
+  time date NULL DEFAULT NULL,
   PRIMARY KEY (id) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 36 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '留言表' ROW_FORMAT = Dynamic;
 
@@ -170,18 +166,18 @@ INSERT INTO message VALUES (35, '贝塔', '开坦克', '2019-09-05');
 -- ----------------------------
 DROP TABLE IF EXISTS multi_question;
 CREATE TABLE multi_question  (
-  questionId int(9) NOT NULL AUTO_INCREMENT COMMENT '试题编号',
-  subject varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '考试科目',
-  question varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '问题题目',
-  answerA varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '选项A',
-  answerB varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '选项B',
-  answerC varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '选项C',
-  answerD varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '选项D',
-  rightAnswer varchar(10) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '正确答案',
-  analysis varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '题目解析',
-  score int(2) NULL DEFAULT 2 COMMENT '分数',
-  section varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '所属章节',
-  level varchar(1) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '难度等级',
+  questionId int(9) NOT NULL AUTO_INCREMENT,
+  subject varchar(20) NULL DEFAULT NULL,
+  question varchar(255) NULL DEFAULT NULL,
+  answerA varchar(255) NULL DEFAULT NULL,
+  answerB varchar(255) NULL DEFAULT NULL,
+  answerC varchar(255) NULL DEFAULT NULL,
+  answerD varchar(255) NULL DEFAULT NULL,
+  rightAnswer varchar(10) NULL DEFAULT NULL,
+  analysis varchar(255) NULL DEFAULT NULL,
+  score int(2) NULL DEFAULT 2,
+  section varchar(20) NULL DEFAULT NULL,
+  level varchar(1) NULL DEFAULT NULL,
   PRIMARY KEY (questionId) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 10033 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '选择题题库表' ROW_FORMAT = Dynamic;
 
@@ -226,9 +222,9 @@ INSERT INTO multi_question VALUES (10032, '计算机网络', 'DNS 服务器和DH
 -- ----------------------------
 DROP TABLE IF EXISTS paper_manage;
 CREATE TABLE paper_manage  (
-  paperId int(9) NULL DEFAULT NULL COMMENT '试卷编号',
-  questionType int(1) NULL DEFAULT NULL COMMENT '题目类型',
-  questionId int(9) NULL DEFAULT NULL COMMENT '题目编号'
+  paperId int(9) NULL DEFAULT NULL,
+  questionType int(1) NULL DEFAULT NULL,
+  questionId int(9) NULL DEFAULT NULL
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '试卷管理表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
@@ -280,10 +276,10 @@ INSERT INTO paper_manage VALUES (1001, 3, 10001);
 -- ----------------------------
 DROP TABLE IF EXISTS replay;
 CREATE TABLE replay  (
-  messageId int(255) NULL DEFAULT NULL COMMENT '留言编号',
-  replayId int(9) NOT NULL AUTO_INCREMENT COMMENT '回复编号',
-  replay varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '内容',
-  replayTime date NULL DEFAULT NULL COMMENT '回复时间',
+  messageId int(255) NULL DEFAULT NULL,
+  replayId int(9) NOT NULL AUTO_INCREMENT,
+  replay varchar(255) NULL DEFAULT NULL,
+  replayTime date NULL DEFAULT NULL,
   PRIMARY KEY (replayId) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 22 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '回复表' ROW_FORMAT = Dynamic;
 
@@ -311,14 +307,14 @@ INSERT INTO replay VALUES (35, 21, '666', '2019-09-05');
 -- ----------------------------
 DROP TABLE IF EXISTS score;
 CREATE TABLE score  (
-  scoreId int(9) NOT NULL AUTO_INCREMENT COMMENT '分数编号',
-  examCode int(9) NULL DEFAULT NULL COMMENT '考试编号',
-  studentId int(9) NULL DEFAULT NULL COMMENT '学号',
-  subject varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT '课程名称',
-  ptScore int(5) NULL DEFAULT NULL COMMENT '平时成绩',
-  etScore int(5) NULL DEFAULT NULL COMMENT '期末成绩',
-  score int(5) NULL DEFAULT NULL COMMENT '总成绩',
-  answerDate varchar(10) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '答题日期',
+  scoreId int(9) NOT NULL AUTO_INCREMENT,
+  examCode int(9) NULL DEFAULT NULL,
+  studentId int(9) NULL DEFAULT NULL,
+  subject varchar(20) NOT NULL,
+  ptScore int(5) NULL DEFAULT NULL,
+  etScore int(5) NULL DEFAULT NULL,
+  score int(5) NULL DEFAULT NULL,
+  answerDate varchar(10) NULL DEFAULT NULL,
   PRIMARY KEY (scoreId) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 32 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '成绩管理表' ROW_FORMAT = Dynamic;
 
@@ -346,18 +342,18 @@ INSERT INTO score VALUES (31, 20190001, 20154084, '计算机网络', NULL, 0, NU
 -- ----------------------------
 DROP TABLE IF EXISTS student;
 CREATE TABLE student  (
-  studentId int(9) NOT NULL AUTO_INCREMENT COMMENT 'ID',
-  studentName varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '姓名',
-  grade varchar(4) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '年级',
-  major varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '专业',
-  clazz varchar(10) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '班级',
-  institute varchar(30) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '学院',
-  tel varchar(11) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '电话号码',
-  email varchar(30) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '电子邮件',
-  pwd varchar(16) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '密码',
-  cardId varchar(18) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '身份证号',
-  sex varchar(2) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '性别',
-  role varchar(1) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT '2' COMMENT '角色(0管理员，1教师，2学生)',
+  studentId int(9) NOT NULL AUTO_INCREMENT,
+  studentName varchar(20) NULL DEFAULT NULL,
+  grade varchar(4) NULL DEFAULT NULL,
+  major varchar(20) NULL DEFAULT NULL,
+  clazz varchar(10) NULL DEFAULT NULL,
+  institute varchar(30) NULL DEFAULT NULL,
+  tel varchar(11) NULL DEFAULT NULL,
+  email varchar(30) NULL DEFAULT NULL,
+  pwd varchar(16) NULL DEFAULT NULL,
+  cardId varchar(18) NULL DEFAULT NULL,
+  sex varchar(2) NULL DEFAULT NULL,
+  role varchar(1) NULL DEFAULT '2',
   PRIMARY KEY (studentId) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 20155009 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '学生信息表' ROW_FORMAT = Dynamic;
 
@@ -375,16 +371,16 @@ INSERT INTO student VALUES (20155008, '小王', '2015', '信息工程', '2', '�
 -- ----------------------------
 DROP TABLE IF EXISTS teacher;
 CREATE TABLE teacher  (
-  teacherId int(9) NOT NULL AUTO_INCREMENT COMMENT 'ID',
-  teacherName varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '姓名',
-  institute varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '学院',
-  sex varchar(2) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '性别',
-  tel varchar(11) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '电话号码',
-  email varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '邮箱',
-  pwd varchar(16) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '密码',
-  cardId varchar(18) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '身份证号',
-  type varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '职称',
-  role varchar(1) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '角色（0管理员，1教师，2学生）',
+  teacherId int(9) NOT NULL AUTO_INCREMENT,
+  teacherName varchar(20) NULL DEFAULT NULL,
+  institute varchar(20) NULL DEFAULT NULL,
+  sex varchar(2) NULL DEFAULT NULL,
+  tel varchar(11) NULL DEFAULT NULL,
+  email varchar(20) NULL DEFAULT NULL,
+  pwd varchar(16) NULL DEFAULT NULL,
+  cardId varchar(18) NULL DEFAULT NULL,
+  type varchar(20) NULL DEFAULT NULL,
+  role varchar(1) NULL DEFAULT NULL,
   PRIMARY KEY (teacherId) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 20081003 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '教师信息表' ROW_FORMAT = Dynamic;
 
