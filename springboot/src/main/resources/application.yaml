@@ -1,0 +1,26 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    dynamic:
+      # 设置默认的数据源
+      primary: master
+      # 严格匹配数据源，默认false
+      strict: false
+      datasource:
+        # 主数据源
+        master:
+          url: jdbc:mysql://localhost:3306/exam?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=UTC
+          driver-class-name: com.mysql.cj.jdbc.Driver
+          username: root
+          password: 123456
+##         从数据源
+#        slave_1:
+#          url: jdbc:postgresql://119.3.168.172:26000/postgres
+#          driver-class-name: org.postgresql.Driver
+#          username: joe
+#          password: qazWSX123
+
+
+
