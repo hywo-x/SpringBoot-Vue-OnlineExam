@@ -8,6 +8,8 @@ public class Student {
 
     private String studentName;
 
+    private String image;
+
     private String grade;
 
     private String major;

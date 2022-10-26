@@ -10,8 +10,14 @@
           <li><router-link to="/scoreTable">我的分数</router-link></li>
           <li><router-link to="/message">给我留言</router-link></li>
           <li><a href="javascript:">待定</a></li>
-          <li class="right" @mouseenter="flag = !flag" @mouseleave="flag = !flag">
-            <a href="javascript:"><i class="iconfont icon-Userselect icon"></i>{{user.userName}}</a>
+          <li>
+            <SingleUpload :url-path="'/student/upload?studentId='+user.studentId" path="/student/" @uploadSuccess="handleUploadSuccess()"></SingleUpload>
+          </li>
+          <li class="right" @mouseenter="flag = !flag" @mouseleave="flag = !flag" style="text-align: center">
+<!--            <img src="static/img/userimg.png">-->
+
+            <img v-if="user.image" class="pic-area" :src="'http://localhost:8080/' + user.image" height="40" width="40">
+            <a href="javascript:" style="text-align: center">{{user.userName}}</a>
             <div class="msg" v-if="flag">
               <p @click="manage()">管理中心</p>
               <p class="exit" @click="exit()">退出</p>
@@ -31,9 +37,16 @@
 <script>
 import myFooter from "@/components/student/myFooter"
 import {mapState} from 'vuex'
+import SingleUpload from "../common/SingleUpload";
+import Vue from "vue"
+import Viewer from "v-viewer"
+
+Vue.use(Viewer)
 export default {
   components: {
-    "v-footer": myFooter
+    "v-footer": myFooter,
+    SingleUpload,
+    Viewer
   },
   data() {
     return {
@@ -45,6 +58,20 @@ export default {
     this.userInfo()
   },
   methods: {
+    handleUploadSuccess() {
+      console.log(this.user)
+      this.$axios({
+        url: 'http://localhost:8080/student/getImage?studentId=' + this.user.studentId,
+        method: 'get',
+      }).then(res => {
+        if (res.data != null) {
+          // console.log(res.data.data());
+          this.user.image = res.data.data;
+          console.log(this.user);
+        }
+      })
+
+    },
     exit() {  //退出登录
       this.$router.push({path:"/"}) //跳转到登录页面
       this.$cookies.remove("cname") //清除cookie
@@ -56,10 +83,11 @@ export default {
     userInfo() {
       let studentName = this.$cookies.get("cname")
       let studentId = this.$cookies.get("cid")
-      console.log(`studentId${studentId}`)
-      console.log(`studentName ${studentName}`)
+      // console.log(`studentId${studentId}`)
+      // console.log(`studentName ${studentName}`)
       this.user.userName = studentName
       this.user.studentId = studentId
+      // this.user.image = this.$cookies.get('cimage');
     },
     practice() { //跳转练习模式
       let isPractice = true

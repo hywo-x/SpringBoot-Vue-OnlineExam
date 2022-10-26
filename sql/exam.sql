@@ -617,6 +617,7 @@ CREATE TABLE `student`
 (
     `studentId`   int(9) NOT NULL AUTO_INCREMENT COMMENT 'ID',
     `studentName` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '姓名',
+    `image`       varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '照片',
     `grade`       varchar(4) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '年级',
     `major`       varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '专业',
     `clazz`       varchar(10) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '班级',
@@ -634,19 +635,19 @@ CREATE TABLE `student`
 -- Records of student
 -- ----------------------------
 INSERT INTO `student`
-VALUES (20154001, '隔壁老王', '2015', '计算机科学与技术', '2', '软件工程学院', '13585439532', 'gblw@163.com', '123456',
+VALUES (20154001, '隔壁老王', '', '2015', '计算机科学与技术', '2', '软件工程学院', '13585439532', 'gblw@163.com', '123456',
         '3412312', '男', '2');
 INSERT INTO `student`
-VALUES (20154084, '大咸鱼', '2015', '计算机科学与技术', '2', '软件工程学院', '13658377857', '13658377857@sina.cn',
+VALUES (20154084, '大咸鱼', '','2015', '计算机科学与技术', '2', '软件工程学院', '13658377857', '13658377857@sina.cn',
         '123456', '124123124535', '男', '2');
 INSERT INTO `student`
-VALUES (20155003, '张大宝', '2015', '信息工程', '1', '软件工程学院', '15583829425', '15583829425@163.com', '123456',
+VALUES (20155003, '张大宝', '', '2015', '信息工程', '1', '软件工程学院', '15583829425', '15583829425@163.com', '123456',
         '3242342', '男', '2');
 INSERT INTO `student`
-VALUES (20155007, '翠花', '2015', '网络工程', '1', '软件工程学院', '18734538457', '18734538457@163.com', '123456',
+VALUES (20155007, '翠花', '','2015', '网络工程', '1', '软件工程学院', '18734538457', '18734538457@163.com', '123456',
         '2423423', '女', '2');
 INSERT INTO `student`
-VALUES (20155008, '小王', '2015', '信息工程', '2', '软件工程学院', '15523619564', '15523619564@163.com', '123456',
+VALUES (20155008, '小王', '','2015', '信息工程', '2', '软件工程学院', '15523619564', '15523619564@163.com', '123456',
         '500234199704022353', '男', '2');
 
 -- ----------------------------

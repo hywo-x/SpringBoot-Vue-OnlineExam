@@ -3,6 +3,7 @@ package com.exam.service;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.exam.entity.Student;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -18,4 +19,6 @@ public interface StudentService {
 
     int updatePwd(Student student);
     int add(Student student);
+
+    String upload(MultipartFile file, String path, Integer studentId);
 }

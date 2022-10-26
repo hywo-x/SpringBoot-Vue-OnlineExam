@@ -1,12 +1,17 @@
 package com.exam.serviceimpl;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.exam.entity.Student;
+import com.exam.exception.BasicException;
 import com.exam.mapper.StudentMapper;
 import com.exam.service.StudentService;
+import com.exam.util.UploadUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -44,5 +49,20 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public int add(Student student) {
         return studentMapper.add(student);
+    }
+
+    @Override
+    public String upload(MultipartFile file, String path, Integer studentId) {
+        Student student = studentMapper.findById(studentId);
+        if (student == null) {
+            throw new BasicException(HttpStatus.BAD_REQUEST.value(), "参数错误，不存在！");
+        }
+        if (!StringUtils.isEmpty(student.getImage())) {
+            UploadUtils.removeFile(student.getImage());
+        }
+        String fullPath  = UploadUtils.uploadPicture(file, path);
+        student.setImage(fullPath);
+        studentMapper.update(student);
+        return fullPath;
     }
 }
