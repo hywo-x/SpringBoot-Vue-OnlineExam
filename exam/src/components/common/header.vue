@@ -7,7 +7,8 @@
         <span class="title" @click="index()">EXAM-SYSTEM</span>
       </el-col>
       <el-col :span="20" class="topbar-right">
-        <i class="el-icon-menu" @click="toggle()"></i>
+        <!-- <i class="el-icon-menu" @click="toggle()"></i> -->
+        <i class="el1"></i>
         <div class="user">
           <span>{{user.userName}}</span>
           <img src="@/assets/img/userimg.png" class="user-img" ref="img" @click="showSetting()" />
@@ -112,7 +113,8 @@ export default {
   height: 50px;
   border-radius: 50%;
 }
-.topbar-right .el-icon-menu {
+.topbar-right .el1 {
+  display: flex;
   font-size: 30px;
   margin-left: 20px;
 }
@@ -139,8 +141,9 @@ export default {
   list-style: none;
 }
 .user .out ul > li {
-  height: 26px;
-  line-height: 26px;
+  height: 24px;
+  line-height: 24px;
+  width: 80px;
 }
 .out a {
   text-decoration: none;

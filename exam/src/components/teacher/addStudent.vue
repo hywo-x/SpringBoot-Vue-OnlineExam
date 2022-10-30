@@ -32,6 +32,9 @@
       <el-form-item label="密码">
         <el-input v-model="form.pwd"></el-input>
       </el-form-item>
+      <el-form-item label="教师ID">
+        <el-input v-model="form.teacherId"> </el-input>
+      </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="onSubmit()">立即创建</el-button>
         <el-button type="text" @click="cancel()">取消</el-button>
@@ -55,7 +58,8 @@ export default {
         pwd: null,
         cardId: null,
         sex: null,
-        role: 2
+        role: 2,
+        teacherId: null
       }
     };
   },
@@ -80,7 +84,7 @@ export default {
     cancel() { //取消按钮
       this.form = {}
     },
-    
+
   }
 };
 </script>

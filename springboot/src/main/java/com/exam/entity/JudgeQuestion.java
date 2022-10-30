@@ -5,6 +5,8 @@ import lombok.Data;
 //判断题实体类
 @Data
 public class JudgeQuestion {
+    public static final int type = 2;
+
     private Integer questionId;
 
     private String subject;

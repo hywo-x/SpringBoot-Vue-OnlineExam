@@ -26,11 +26,10 @@ export default {
   },
   data() {
     return {
-      username: '许如梦'
     }
   },
   methods: {
-    
+
   }
 }
 </script>
