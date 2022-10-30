@@ -36,7 +36,7 @@ export default {
       user: { //用户信息
         userName: null,
         userId: null
-      } 
+      }
     }
   },
   created() {

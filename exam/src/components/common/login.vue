@@ -83,6 +83,7 @@ export default {
             case "2": //学生
               this.$cookies.set("cname", resData.studentName)
               this.$cookies.set("cid", resData.studentId)
+              this.$cookies.set('cimage', resData.image);
               this.$router.push({path: '/student'})
               break
           }

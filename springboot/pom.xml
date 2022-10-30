@@ -21,6 +21,7 @@
     </properties>
 
     <dependencies>
+        <!-- 高斯数据库驱动 -->
         <dependency>
             <groupId>com.huaweicloud.dws</groupId>
             <artifactId>huaweicloud-dws-jdbc</artifactId>

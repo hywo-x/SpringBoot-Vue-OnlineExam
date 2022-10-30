@@ -12,6 +12,7 @@ import com.exam.util.ApiResultHandler;
 import com.huawei.shade.com.alibaba.fastjson.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -115,4 +116,17 @@ public class StudentController {
             return ApiResultHandler.buildApiResult(400, "导出文件失败", 400);
         }
     }
+
+    @PostMapping("/student/upload")
+    public ApiResult upload(@RequestPart MultipartFile file, @RequestParam("path") String path, @RequestParam("studentId") Integer studentId) {
+        String fullPath = studentService.upload(file, path, studentId);
+        return ApiResultHandler.buildApiResult(200, "添加成功", fullPath);
+    }
+
+    @GetMapping("/student/getImage")
+    public ApiResult getImage(@RequestParam Integer studentId) {
+        Student byId = studentService.findById(studentId);
+        return ApiResultHandler.buildApiResult(200, "查找成功", byId.getImage());
+    }
+
 }

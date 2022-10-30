@@ -41,6 +41,7 @@ public interface StudentMapper {
      * @param student 传递一个对象
      * @return 受影响的记录条数
      */
+
     @Update("{call prd_insert_update_student(#{studentId,mode=IN,jdbcType=INTEGER}, #{studentName,mode=IN,jdbcType=VARCHAR},#{grade,mode=IN,jdbcType=VARCHAR}," +
             "#{major,mode=IN,jdbcType=VARCHAR}, #{clazz,mode=IN,jdbcType=VARCHAR}, #{institute,mode=IN,jdbcType=VARCHAR}, #{tel,mode=IN,jdbcType=VARCHAR}," +
             "#{email,mode=IN,jdbcType=VARCHAR}, #{pwd,mode=IN,jdbcType=VARCHAR}, #{cardId,mode=IN,jdbcType=VARCHAR},#{sex,mode=IN,jdbcType=VARCHAR}," +

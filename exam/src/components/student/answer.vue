@@ -22,19 +22,19 @@
           <div class="left" v-if="slider_flag">
             <ul class="l-top">
               <li>
-                <a href="javascript:;"></a>
+                <a href="javascript:"></a>
                 <span>当前</span>
               </li>
               <li>
-                <a href="javascript:;"></a>
+                <a href="javascript:"></a>
                 <span>未答</span>
               </li>
               <li>
-                <a href="javascript:;"></a>
+                <a href="javascript:"></a>
                 <span>已答</span>
               </li>
               <li>
-                <a href="javascript:;"></a>
+                <a href="javascript:"></a>
                 <span>标记</span>
               </li>
             </ul>
@@ -43,10 +43,10 @@
                 <p>选择题部分</p>
                 <ul>
                   <li v-for="(list, index1) in topic[1]" :key="index1">
-                    <a href="javascript:;" 
+                    <a href="javascript:"
                       @click="change(index1)"
-                      :class="{'border': index == index1 && currentType == 1,'bg': bg_flag && topic[1][index1].isClick == true}">
-                      <span :class="{'mark': topic[1][index1].isMark == true}"></span>
+                      :class="{'border': index === index1 && currentType === 1,'bg': bg_flag && topic[1][index1].isClick === true}">
+                      <span :class="{'mark': topic[1][index1].isMark === true}"></span>
                       {{index1+1}}
                     </a>
                   </li>
@@ -56,7 +56,7 @@
                 <p>填空题部分</p>
                 <ul>
                   <li v-for="(list, index2) in topic[2]" :key="index2">
-                    <a href="javascript:;" @click="fill(index2)" :class="{'border': index == index2 && currentType == 2,'bg': fillAnswer[index2][3] == true}"><span :class="{'mark': topic[2][index2].isMark == true}"></span>{{topicCount[0]+index2+1}}</a>
+                    <a href="javascript:;" @click="fill(index2)" :class="{'border': index === index2 && currentType === 2,'bg': fillAnswer[index2][3] == true}"><span :class="{'mark': topic[2][index2].isMark == true}"></span>{{topicCount[0]+index2+1}}</a>
                   </li>
                 </ul>
               </div>
@@ -64,14 +64,14 @@
                 <p>判断题部分</p>
                 <ul>
                   <li v-for="(list, index3) in topic[3]" :key="index3">
-                    <a href="javascript:;" @click="judge(index3)" :class="{'border': index == index3 && currentType == 3,'bg': bg_flag && topic[3][index3].isClick == true}"><span :class="{'mark': topic[3][index3].isMark == true}"></span>{{topicCount[0]+topicCount[1]+index3+1}}</a>
+                    <a href="javascript:" @click="judge(index3)" :class="{'border': index === index3 && currentType === 3,'bg': bg_flag && topic[3][index3].isClick === true}"><span :class="{'mark': topic[3][index3].isMark === true}"></span>{{topicCount[0]+topicCount[1]+index3+1}}</a>
                   </li>
                 </ul>
               </div>
               <div class="final" @click="commit()">结束考试</div>
             </div>
           </div>
-        </transition>  
+        </transition>
         <!--右边选择答题区-->
         <transition name="slider-fade">
         <div class="right">
@@ -82,7 +82,7 @@
           </div>
           <div class="content">
             <p class="topic"><span class="number">{{number}}</span>{{showQuestion}}</p>
-            <div v-if="currentType == 1">
+            <div v-if="currentType === 1">
               <el-radio-group v-model="radio[index]" @change="getChangeLabel" >
                 <el-radio :label="1">{{showAnswer.answerA}}</el-radio>
                 <el-radio :label="2">{{showAnswer.answerB}}</el-radio>
@@ -136,7 +136,7 @@
           </div>
         </div>
         </transition>
-     </div> 
+     </div>
   </div>
 </template>
 
@@ -202,7 +202,7 @@ export default {
       this.userInfo.id = this.$cookies.get("cid")
     },
     calcuScore() { //计算答题分数
-      
+
     },
     getExamData() { //获取当前试卷所有信息
       let date = new Date()
@@ -288,7 +288,7 @@ export default {
           let part= this.showQuestion.split("()").length -1 //根据题目中括号的数量确定填空横线数量
           this.part = part
           this.number = this.topicCount[0] + index + 1
-        } 
+        }
       }else if(index >= len) {
         this.index = 0
         this.judge(this.index)
@@ -324,7 +324,7 @@ export default {
         data[this.index]["isClick"] = true
       }
       /* 保存学生答题选项 */
-      this.topic1Answer[this.index] = val 
+      this.topic1Answer[this.index] = val
     },
     getJudgeLabel(val) {  //获取判断题作答选项
       this.judgeAnswer[this.index] = val
@@ -337,10 +337,10 @@ export default {
     previous() { //上一题
       this.index --
       switch(this.currentType) {
-        case 1: 
+        case 1:
           this.change(this.index)
           break
-        case 2: 
+        case 2:
           this.fill(this.index)
           break
         case 3:
@@ -351,10 +351,10 @@ export default {
     next() { //下一题
       this.index ++
       switch(this.currentType) {
-        case 1: 
+        case 1:
           this.change(this.index)
           break
-        case 2: 
+        case 2:
           this.fill(this.index)
           break
         case 3:
@@ -394,7 +394,7 @@ export default {
             case 4:
               right = "D"
           }
-          if(right == this.topic[1][index].rightAnswer) { // 当前选项与正确答案对比
+          if(right === this.topic[1][index].rightAnswer) { // 当前选项与正确答案对比
             finalScore += this.topic[1][index].score // 计算总分数
           }
           console.log(right,this.topic[1][index].rightAnswer)
@@ -424,12 +424,12 @@ export default {
           case 2:
             right = "F"
         }
-        if(right == this.topic[3][index].answer) { // 当前选项与正确答案对比
+        if(right === this.topic[3][index].answer) { // 当前选项与正确答案对比
             finalScore += this.topic[3][index].score // 计算总分数
           }
       })
       console.log(`目前总分${finalScore}`)
-      if(this.time != 0) {
+      if(this.time !== 0) {
         this.$confirm("考试结束时间未到,是否提前交卷","友情提示",{
           confirmButtonText: '立即交卷',
           cancelButtonText: '再检查一下',
@@ -451,13 +451,13 @@ export default {
               answerDate: answerDate, //答题日期
             }
           }).then(res => {
-            if(res.data.code == 200) {
+            if(res.data.code === 200) {
               this.$router.push({path:'/studentScore',query: {
-                score: finalScore, 
+                score: finalScore,
                 startTime: this.startTime,
                 endTime: this.endTime
               }})
-            }  
+            }
           })
         }).catch(() => {
           console.log("继续答题")
@@ -467,13 +467,13 @@ export default {
     showTime() { //倒计时
       setInterval(() => {
         this.time -= 1
-        if(this.time == 10) {
+        if(this.time === 10) {
           this.$message({
             showClose: true,
             type: 'error',
             message: '考生注意,考试时间还剩10分钟！！！'
           })
-          if(this.time == 0) {
+          if(this.time === 0) {
             console.log("考试时间已到,强制交卷。")
           }
         }
@@ -592,7 +592,7 @@ export default {
 }
 .content .topic {
   padding: 20px 0px;
-  padding-top: 30px; 
+  padding-top: 30px;
 }
 .right .content {
   background-color: #fff;
@@ -678,7 +678,7 @@ export default {
   justify-content: space-around;
   flex-wrap: wrap;
 }
-.l-bottom .item ul li a { 
+.l-bottom .item ul li a {
   position: relative;
   justify-content: center;
   display: inline-flex;
