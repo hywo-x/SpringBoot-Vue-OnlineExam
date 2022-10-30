@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.exam.entity.FillQuestion;
 import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.mapping.StatementType;
 
 import java.util.List;
 
@@ -24,9 +25,13 @@ public interface FillQuestionMapper {
     @Select("select questionId from fill_question order by questionId desc limit 1")
     FillQuestion findOnlyQuestionId();
 
-    @Options(useGeneratedKeys = true,keyProperty ="questionId" )
-    @Insert("insert into fill_question(subject,question,answer,analysis,level,section) values " +
-            "(#{subject,},#{question},#{answer},#{analysis},#{level},#{section})")
+    //@Options(useGeneratedKeys = true,keyProperty ="questionId" )
+    //@Insert("insert into fill_question(subject,question,answer,analysis,level,section) values " +
+    //        "(#{subject,},#{question},#{answer},#{analysis},#{level},#{section})")
+    @Options(useGeneratedKeys = true, keyProperty = "questionId", statementType = StatementType.CALLABLE)
+    @Insert("{call prd_add_question(#{type, mode=IN, jdbcType=INTEGER}, #{subject, mode=IN, jdbcType=VARCHAR}, #{question, mode=IN, jdbcType=VARCHAR}, #{analysis, mode=IN, jdbcType=VARCHAR}, " +
+            "#{level, mode=IN, jdbcType=VARCHAR}, #{section, mode=IN, jdbcType=VARCHAR}, #{answer, mode=IN, jdbcType=VARCHAR}, #{answer, mode=IN, jdbcType=VARCHAR}, " +
+            "#{answer, mode=IN, jdbcType=VARCHAR}, #{answer, mode=IN, jdbcType=VARCHAR}, #{answer, mode=IN, jdbcType=VARCHAR})}")
     int add(FillQuestion fillQuestion);
 
     @Select("select questionId from fill_question where subject = #{subject} order by rand() desc limit #{pageNo}")

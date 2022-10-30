@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.mapping.StatementType;
 
 import java.util.List;
 
@@ -16,8 +17,11 @@ public interface ScoreMapper {
      * @param score 添加一条成绩记录
      * @return
      */
-    @Options(useGeneratedKeys = true,keyProperty = "scoreId")
-    @Insert("insert into score(examCode,studentId,subject,ptScore,etScore,score,answerDate) values(#{examCode},#{studentId},#{subject},#{ptScore},#{etScore},#{score},#{answerDate})")
+    @Options(useGeneratedKeys = true, keyProperty = "scoreId",statementType = StatementType.CALLABLE)
+    //@Insert("insert into score(examCode,studentId,subject,ptScore,etScore,score,answerDate) values(#{examCode},#{studentId},#{subject},#{ptScore},#{etScore},#{score},#{answerDate})")
+    @Insert("{call prd_insert_score(#{examCode,mode=IN,jdbcType=INTEGER},#{studentId,mode=IN,jdbcType=INTEGER},\n" +
+            "    #{subject,mode=IN,jdbcType=VARCHAR},#{ptScore,mode=IN,jdbcType=INTEGER},#{etScore,mode=IN,jdbcType=INTEGER},\n" +
+            "    #{score,mode=IN,jdbcType=INTEGER},#{answerDate,mode=IN,jdbcType=VARCHAR})}")
     int add(Score score);
 
     @Select("select scoreId,examCode,studentId,subject,ptScore,etScore,score,answerDate from score order by scoreId desc")

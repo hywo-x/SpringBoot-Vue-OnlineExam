@@ -5,6 +5,8 @@ import lombok.Data;
 // 选择题实体
 @Data
 public class MultiQuestion {
+    public static final int type = 3;
+
     private Integer questionId;
 
     private String subject;

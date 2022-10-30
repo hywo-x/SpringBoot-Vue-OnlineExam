@@ -3,14 +3,18 @@ package com.exam.service;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.exam.entity.Student;
+import com.exam.entity.Student1;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public interface StudentService {
 
-    IPage<Student> findAll(Page<Student> page);
+    IPage<Student1> findAll(Page<Student1> page);
 
-    Student findById(Integer studentId);
+    // IPage<Student1> findAll();
+
+    Student findById(Integer studentId) throws SQLException;
 
     int deleteById(Integer studentId);
 
@@ -18,4 +22,8 @@ public interface StudentService {
 
     int updatePwd(Student student);
     int add(Student student);
+
+    int exportStudent();
+
+    List<Student> findAllStudent();
 }

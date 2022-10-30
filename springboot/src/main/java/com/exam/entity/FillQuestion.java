@@ -5,6 +5,8 @@ import lombok.Data;
 //填空题实体类
 @Data
 public class FillQuestion {
+    public static final int type = 1;
+
     private Integer questionId;
 
     private String subject;

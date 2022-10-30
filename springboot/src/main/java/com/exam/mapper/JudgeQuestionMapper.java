@@ -5,7 +5,9 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.exam.entity.JudgeQuestion;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.mapping.StatementType;
 
 import java.util.List;
 
@@ -27,8 +29,12 @@ public interface JudgeQuestionMapper {
     @Select("select questionId from judge_question order by questionId desc limit 1")
     JudgeQuestion findOnlyQuestionId();
 
-    @Insert("insert into judge_question(subject,question,answer,analysis,level,section) values " +
-            "(#{subject},#{question},#{answer},#{analysis},#{level},#{section})")
+    //@Insert("insert into judge_question(subject,question,answer,analysis,level,section) values " +
+    //        "(#{subject},#{question},#{answer},#{analysis},#{level},#{section})")
+    @Options(useGeneratedKeys = true, keyProperty = "questionId", statementType = StatementType.CALLABLE)
+    @Insert("{call prd_add_question(#{type, mode=IN, jdbcType=INTEGER}, #{subject, mode=IN, jdbcType=VARCHAR}, #{question, mode=IN, jdbcType=VARCHAR}, #{analysis, mode=IN, jdbcType=VARCHAR}, " +
+            "#{level, mode=IN, jdbcType=VARCHAR}, #{section, mode=IN, jdbcType=VARCHAR}, #{answer, mode=IN, jdbcType=VARCHAR}, #{answer, mode=IN, jdbcType=VARCHAR}, " +
+            "#{answer, mode=IN, jdbcType=VARCHAR}, #{answer, mode=IN, jdbcType=VARCHAR}, #{answer, mode=IN, jdbcType=VARCHAR})}")
     int add(JudgeQuestion judgeQuestion);
 
     @Select("select questionId from judge_question  where subject=#{subject}  order by rand() desc limit #{pageNo}")
