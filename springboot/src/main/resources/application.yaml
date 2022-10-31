@@ -5,7 +5,7 @@ spring:
   datasource:
     dynamic:
       # 设置默认的数据源
-      primary: slave_1
+      primary: slave
       # 严格匹配数据源，默认false
       strict: false
       datasource:
@@ -17,7 +17,7 @@ spring:
           password: Bigdata@123
 
         #  从数据源
-        slave_1:
+        slave:
           url: jdbc:postgresql://119.3.168.172:26000/postgres
           driver-class-name: org.postgresql.Driver
           username: joe
