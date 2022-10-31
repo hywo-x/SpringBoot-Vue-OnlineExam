@@ -124,7 +124,7 @@ public class StudentController {
     }
 
     @GetMapping("/student/getImage")
-    public ApiResult getImage(@RequestParam Integer studentId) {
+    public ApiResult getImage(@RequestParam Integer studentId) throws SQLException {
         Student byId = studentService.findById(studentId);
         return ApiResultHandler.buildApiResult(200, "查找成功", byId.getImage());
     }
