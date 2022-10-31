@@ -21,6 +21,12 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid-spring-boot-starter</artifactId>
+            <version>1.2.11</version>
+        </dependency>
+
         <!-- 高斯数据库驱动 -->
         <dependency>
             <groupId>com.huaweicloud.dws</groupId>
