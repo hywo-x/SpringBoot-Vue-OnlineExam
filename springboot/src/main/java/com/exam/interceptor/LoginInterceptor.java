@@ -25,7 +25,8 @@ public class LoginInterceptor implements HandlerInterceptor {
             }
             // 有登录验证注解，则校验登录
             if (null != needLogin) {
-
+                String cookie = request.getHeader("cookie");
+                System.out.println(cookie);
             }
 
         }

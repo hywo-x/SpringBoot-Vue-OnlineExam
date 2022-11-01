@@ -11,7 +11,7 @@ CREATE TABLE admin
     sex       VARCHAR(3)         NULL DEFAULT NULL,
     tel       VARCHAR(11)        NULL DEFAULT NULL,
     email     VARCHAR(20)        NULL DEFAULT NULL,
-    pwd       VARCHAR(16)        NULL DEFAULT NULL,
+    pwd       VARCHAR(100)        NULL DEFAULT NULL,
     cardId    VARCHAR(18)        NULL DEFAULT NULL,
     role      VARCHAR(1)         NULL DEFAULT NULL
 );
@@ -20,7 +20,7 @@ CREATE TABLE admin
 -- Records of admin
 -- ----------------------------
 INSERT INTO admin
-VALUES (9527, '超级管理员', '男', '13658377857', '1253838283@qq.com', '123456', '3132', '0');
+VALUES (9527, '超级管理员', '男', '13658377857', '1253838283@qq.com', 'E10ADC3949BA59ABBE56E057F20F883E', '3132', '0');
 
 -- ----------------------------
 -- Table structure for exam_manage
@@ -590,7 +590,7 @@ CREATE TABLE student
     institute   VARCHAR(30)        NULL DEFAULT NULL,
     tel         VARCHAR(11)        NULL DEFAULT NULL,
     email       VARCHAR(30)        NULL DEFAULT NULL,
-    pwd         VARCHAR(16)        NULL DEFAULT NULL,
+    pwd         VARCHAR(100)        NULL DEFAULT NULL,
     cardId      VARCHAR(18)        NULL DEFAULT NULL,
     sex         VARCHAR(3)         NULL DEFAULT NULL,
     role        VARCHAR(1)         NULL DEFAULT '2'
@@ -599,19 +599,19 @@ CREATE TABLE student
 -- Records of student
 -- ----------------------------
 INSERT INTO student
-VALUES (20154001, '隔壁老王', '','2015', '计算机科学与技术', '2', '软件工程学院', '13585439532', 'gblw@163.com', '123456',
+VALUES (20154001, '隔壁老王', '','2015', '计算机科学与技术', '2', '软件工程学院', '13585439532', 'gblw@163.com', 'E10ADC3949BA59ABBE56E057F20F883E',
         '3412312', '男', '2');
 INSERT INTO student
 VALUES (20154084, '大咸鱼', '','2015', '计算机科学与技术', '2', '软件工程学院', '13658377857', '13658377857@sina.cn',
-        '123456', '124123124535', '男', '2');
+        'E10ADC3949BA59ABBE56E057F20F883E', '124123124535', '男', '2');
 INSERT INTO student
-VALUES (20155003, '张大宝', '','2015', '信息工程', '1', '软件工程学院', '15583829425', '15583829425@163.com', '123456',
+VALUES (20155003, '张大宝', '','2015', '信息工程', '1', '软件工程学院', '15583829425', '15583829425@163.com', 'E10ADC3949BA59ABBE56E057F20F883E',
         '3242342', '男', '2');
 INSERT INTO student
-VALUES (20155007, '翠花', '','2015', '网络工程', '1', '软件工程学院', '18734538457', '18734538457@163.com', '123456',
+VALUES (20155007, '翠花', '','2015', '网络工程', '1', '软件工程学院', '18734538457', '18734538457@163.com', 'E10ADC3949BA59ABBE56E057F20F883E',
         '2423423', '女', '2');
 INSERT INTO student
-VALUES (20155008, '小王', '','2015', '信息工程', '2', '软件工程学院', '15523619564', '15523619564@163.com', '123456',
+VALUES (20155008, '小王', '','2015', '信息工程', '2', '软件工程学院', '15523619564', '15523619564@163.com', 'E10ADC3949BA59ABBE56E057F20F883E',
         '500234199704022353', '男', '2');
 
 -- ----------------------------
@@ -626,7 +626,7 @@ CREATE TABLE teacher
     sex         VARCHAR(3)         NULL DEFAULT NULL,
     tel         VARCHAR(11)        NULL DEFAULT NULL,
     email       VARCHAR(20)        NULL DEFAULT NULL,
-    pwd         VARCHAR(16)        NULL DEFAULT NULL,
+    pwd         VARCHAR(100)        NULL DEFAULT NULL,
     cardId      VARCHAR(18)        NULL DEFAULT NULL,
     type        VARCHAR(20)        NULL DEFAULT NULL,
     role        VARCHAR(1)         NULL DEFAULT NULL
@@ -635,9 +635,9 @@ CREATE TABLE teacher
 -- Records of teacher
 -- ----------------------------
 INSERT INTO teacher
-VALUES (20081001, '张', '软件工程学院', '男', '13598458442', '13598458442@163.com', '123456', '423423283498', '讲师',
+VALUES (20081001, '张', '软件工程学院', '男', '13598458442', '13598458442@163.com', 'E10ADC3949BA59ABBE56E057F20F883E', '423423283498', '讲师',
         '1');
 INSERT INTO teacher
-VALUES (20081002, '王大志', '软件工程学院', '男', '1231221312', '1231221312@163.com', '123456', '24241234', '讲师',
+VALUES (20081002, '王大志', '软件工程学院', '男', '1231221312', '1231221312@163.com', 'E10ADC3949BA59ABBE56E057F20F883E', '24241234', '讲师',
         '1');
 

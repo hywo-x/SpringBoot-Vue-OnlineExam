@@ -29,7 +29,7 @@ CREATE TABLE `admin`
     `sex`       varchar(2) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '性别',
     `tel`       varchar(11) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '电话号码',
     `email`     varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '电子邮箱',
-    `pwd`       varchar(16) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '密码',
+    `pwd`       varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '密码',
     `cardId`    varchar(18) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '身份证号',
     `role`      varchar(1) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '角色(0管理员，1教师，2学生)',
     PRIMARY KEY (`adminId`) USING BTREE,
@@ -40,7 +40,7 @@ CREATE TABLE `admin`
 -- Records of admin
 -- ----------------------------
 INSERT INTO `admin`
-VALUES (9527, '超级管理员', '男', '13658377857', '1253838283@qq.com', '123456', '3132', '0');
+VALUES (9527, '超级管理员', '男', '13658377857', '1253838283@qq.com', 'E10ADC3949BA59ABBE56E057F20F883E', '3132', '0');
 
 -- ----------------------------
 -- Table structure for exam_manage
@@ -624,7 +624,7 @@ CREATE TABLE `student`
     `institute`   varchar(30) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '学院',
     `tel`         varchar(11) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '电话号码',
     `email`       varchar(30) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '电子邮件',
-    `pwd`         varchar(16) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '密码',
+    `pwd`         varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '密码',
     `cardId`      varchar(18) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '身份证号',
     `sex`         varchar(2) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '性别',
     `role`        varchar(1) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT '2' COMMENT '角色(0管理员，1教师，2学生)',
@@ -635,19 +635,19 @@ CREATE TABLE `student`
 -- Records of student
 -- ----------------------------
 INSERT INTO `student`
-VALUES (20154001, '隔壁老王', '', '2015', '计算机科学与技术', '2', '软件工程学院', '13585439532', 'gblw@163.com', '123456',
+VALUES (20154001, '隔壁老王', '', '2015', '计算机科学与技术', '2', '软件工程学院', '13585439532', 'gblw@163.com', 'E10ADC3949BA59ABBE56E057F20F883E',
         '3412312', '男', '2');
 INSERT INTO `student`
 VALUES (20154084, '大咸鱼', '','2015', '计算机科学与技术', '2', '软件工程学院', '13658377857', '13658377857@sina.cn',
-        '123456', '124123124535', '男', '2');
+        'E10ADC3949BA59ABBE56E057F20F883E', '124123124535', '男', '2');
 INSERT INTO `student`
-VALUES (20155003, '张大宝', '', '2015', '信息工程', '1', '软件工程学院', '15583829425', '15583829425@163.com', '123456',
+VALUES (20155003, '张大宝', '', '2015', '信息工程', '1', '软件工程学院', '15583829425', '15583829425@163.com', 'E10ADC3949BA59ABBE56E057F20F883E',
         '3242342', '男', '2');
 INSERT INTO `student`
-VALUES (20155007, '翠花', '','2015', '网络工程', '1', '软件工程学院', '18734538457', '18734538457@163.com', '123456',
+VALUES (20155007, '翠花', '','2015', '网络工程', '1', '软件工程学院', '18734538457', '18734538457@163.com', 'E10ADC3949BA59ABBE56E057F20F883E',
         '2423423', '女', '2');
 INSERT INTO `student`
-VALUES (20155008, '小王', '','2015', '信息工程', '2', '软件工程学院', '15523619564', '15523619564@163.com', '123456',
+VALUES (20155008, '小王', '','2015', '信息工程', '2', '软件工程学院', '15523619564', '15523619564@163.com', 'E10ADC3949BA59ABBE56E057F20F883E',
         '500234199704022353', '男', '2');
 
 -- ----------------------------
@@ -673,10 +673,10 @@ CREATE TABLE `teacher`
 -- Records of teacher
 -- ----------------------------
 INSERT INTO `teacher`
-VALUES (20081001, '张', '软件工程学院', '男', '13598458442', '13598458442@163.com', '123456', '423423283498', '讲师',
+VALUES (20081001, '张', '软件工程学院', '男', '13598458442', '13598458442@163.com', 'E10ADC3949BA59ABBE56E057F20F883E', '423423283498', '讲师',
         '1');
 INSERT INTO `teacher`
-VALUES (20081002, '王大志', '软件工程学院', '男', '1231221312', '1231221312@163.com', '123456', '24241234', '讲师',
+VALUES (20081002, '王大志', '软件工程学院', '男', '1231221312', '1231221312@163.com', 'E10ADC3949BA59ABBE56E057F20F883E', '24241234', '讲师',
         '1');
 
 SET

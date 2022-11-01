@@ -17,7 +17,7 @@ public class SlaveDataSourceConfig {
     @Value("${spring.datasource.dynamic.datasource.slave.password}")
     private String password;
 
-    @Value("${spring.datasource.dynamic.datasource.slave.driverClassName}")
+    @Value("${spring.datasource.dynamic.datasource.slave.driver-class-name}")
     private String driverClassName;
 
 }

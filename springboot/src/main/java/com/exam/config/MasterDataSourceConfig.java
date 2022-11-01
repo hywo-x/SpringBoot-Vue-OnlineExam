@@ -17,7 +17,7 @@ public class MasterDataSourceConfig {
     @Value("${spring.datasource.dynamic.datasource.master.password}")
     private String password;
 
-    @Value("${spring.datasource.dynamic.datasource.master.driverClassName}")
+    @Value("${spring.datasource.dynamic.datasource.master.driver-class-name}")
     private String driverClassName;
 
 }
