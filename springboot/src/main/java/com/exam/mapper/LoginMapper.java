@@ -15,11 +15,7 @@ import static org.apache.ibatis.mapping.StatementType.*;
 @Mapper
 public interface LoginMapper {
 
-    @Select("select * from admin where adminId = #{username} and pwd = #{password}")
-    //@Select("{call prd_login_admin(#{username, mode=IN, jdbcType=INTEGER}, #{password, mode=IN, jdbcType=VARCHAR}, #{adminId, mode=OUT, jdbcType=INTEGER}," +
-    //        "#{adminName, mode=OUT, jdbcType=VARCHAR}, #{sex, mode=OUT, jdbcType=VARCHAR}, #{tel, mode=OUT, jdbcType=VARCHAR}, #{email, mode=OUT, jdbcType=VARCHAR}," +
-    //       "#{cardId, mode=OUT, jdbcType=VARCHAR}, #{role, mode=OUT, jdbcType=VARCHAR})}")
-    //select语句改存储过程不太好改，这段不要使用
+    @Select("select adminId,adminName,sex,tel,email,cardId,role from admin where adminId = #{username} and pwd = #{password}")
     public Admin adminLogin(Integer username, String password);
 
     @Select("select teacherId,teacherName,institute,sex,tel,email,cardId," +
