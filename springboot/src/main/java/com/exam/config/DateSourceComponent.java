@@ -62,7 +62,7 @@ public class DateSourceComponent {
         targetDateSource.put("master", masterDateSource);
         targetDateSource.put("slave", slaveDateSource);
         multiRouteDataSource.setTargetDataSources(targetDateSource);
-        multiRouteDataSource.setDefaultTargetDataSource(masterDateSource);
+        multiRouteDataSource.setDefaultTargetDataSource(slaveDateSource);
         return multiRouteDataSource;
     }
 
