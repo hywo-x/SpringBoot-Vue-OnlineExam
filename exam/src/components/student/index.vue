@@ -9,15 +9,8 @@
           <li><a href="javascript:" @click="practice()">我的练习</a></li>
           <li><router-link to="/scoreTable">我的分数</router-link></li>
           <li><router-link to="/message">给我留言</router-link></li>
-
-          <li class="right" @mouseenter="flag = !flag" @mouseleave="flag = !flag">
-            <a href="javascript:;"><i class="iconfont icon-Userselect icon"></i>{{user.userName}}</a>
-
-          <li>
-            <SingleUpload :url-path="'/student/upload?studentId='+user.studentId" path="/student/" @uploadSuccess="handleUploadSuccess()"></SingleUpload>
-          </li>
           <li class="right" @mouseenter="flag = !flag" @mouseleave="flag = !flag" style="text-align: center">
-            <img v-if="user.image" class="pic-area" :src="'http://localhost:8080/' + user.image" height="40" width="40">
+            <img v-if="user.image" class="pic-area" :src="'http://localhost:8080/' + user.image +'?' + Math.random()" height="40" width="40">
             <a href="javascript:" style="text-align: center">{{user.userName}}</a>
             <div class="msg" v-if="flag">
               <p @click="manage()">管理中心</p>
@@ -55,12 +48,18 @@ export default {
       user: {}
     }
   },
+  mounted() {
+    this.bus.$on('loadImage', ()=> {
+      this.handleUploadSuccess()
+      this.$forceUpdate()
+    })
+  },
   created() {
     this.userInfo()
+    this.handleUploadSuccess()
   },
   methods: {
     handleUploadSuccess() {
-      console.log(this.user)
       this.$axios({
         url: 'http://localhost:8080/student/getImage?studentId=' + this.user.studentId,
         method: 'get',
@@ -79,7 +78,12 @@ export default {
       this.$cookies.remove("cid")
     },
     manage() {  //跳转到修改密码页面
-      this.$router.push({path: '/manager'})
+      this.$router.push({
+        name: 'manager',
+        params: {
+          id: this.user.studentId
+        }
+      })
     },
     userInfo() {
       let studentName = this.$cookies.get("cname")

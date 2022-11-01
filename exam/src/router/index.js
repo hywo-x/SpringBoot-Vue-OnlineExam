@@ -2,6 +2,16 @@ import Vue from 'vue'
 import Router from 'vue-router'
 Vue.use(Router)
 
+
+
+// 解决重复点击路由报错的BUG
+const originalPush = Vue.prototype.push
+Vue.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch((err) => err)
+}
+
+
+
 export default new Router({
   routes: [
     {
@@ -85,7 +95,7 @@ export default new Router({
       children: [
         {path:"/",component: ()=> import('@/components/student/myExam')},
         {path:'/startExam', component: () => import('@/components/student/startExam')},
-        {path: '/manager', component: () => import('@/components/student/manager')},
+        {path: '/manager', name:'manager', component: () => import('@/components/student/manager')},
         {path: '/examMsg', component: () => import('@/components/student/examMsg')},
         {path: '/message', component: () => import('@/components/student/message')},
         {path: '/studentScore', component: () => import("@/components/student/answerScore")},
