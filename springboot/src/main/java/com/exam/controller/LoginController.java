@@ -1,5 +1,6 @@
 package com.exam.controller;
 
+import com.exam.annotation.CheckLogin;
 import com.exam.entity.*;
 import com.exam.serviceimpl.LoginServiceImpl;
 import com.exam.util.ApiResultHandler;
@@ -18,6 +19,7 @@ public class LoginController {
     private LoginServiceImpl loginService;
 
     @PostMapping("/login")
+    @CheckLogin
     public ApiResult login(@RequestBody Login login) throws NoSuchAlgorithmException {
 
         Integer username = login.getUsername();
