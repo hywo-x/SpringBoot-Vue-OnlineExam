@@ -64,20 +64,20 @@ $$;
 -- Name: prd_add_question; Type: Function; Schema: user1;
 
 CREATE OR REPLACE PROCEDURE user1.prd_add_question(question_type integer, q_subject character varying, q_question character varying, q_analysis character varying, q_level character varying, q_section character varying, q_answer character varying, q_ansa character varying, q_ansb character varying, q_ansc character varying, q_ansd character varying)
-AS 
+AS
 DECLARE
 
 	/*declaration_section*/
 
 BEGIN
   IF question_type=1 THEN
-    INSERT INTO fill_question(subject, question, answer, analysis, section, level) 
+    INSERT INTO fill_question(subject, question, answer, analysis, section, level)
     VALUES(q_subject,q_question,q_answer,q_analysis,q_section,q_level);
   ELSIF question_type=2 THEN
-    INSERT INTO judge_question(subject, question, answer, analysis, section, level) 
+    INSERT INTO judge_question(subject, question, answer, analysis, section, level)
     VALUES(q_subject,q_question,q_answer,q_analysis,q_section,q_level);
   ELSE
-    INSERT INTO multi_question(subject,question,answerA,answerB,answerC,answerD,rightAnswer,analysis,section,level) 
+    INSERT INTO multi_question(subject,question,answerA,answerB,answerC,answerD,rightAnswer,analysis,section,level)
     VALUES(q_subject,q_question,q_ansA,q_ansB,q_ansC,q_ansD,q_answer,q_analysis,q_section,q_level);
 	END IF;
 	/*executable_section*/
@@ -89,7 +89,7 @@ END;
 -- Name: prd_admin_delete; Type: Function; Schema: user1;
 
 CREATE OR REPLACE PROCEDURE user1.prd_admin_delete(admin_id integer)
-AS 
+AS
 DECLARE
 
 	/*declaration_section*/
@@ -105,7 +105,7 @@ END;
 -- Name: prd_delete_exam; Type: Function; Schema: user1;
 
 CREATE OR REPLACE PROCEDURE user1.prd_delete_exam(exam_id integer)
-AS 
+AS
 DECLARE
 
 	/*declaration_section*/
@@ -121,21 +121,21 @@ END;
 -- Name: prd_insert_update_admin; Type: Function; Schema: user1;
 
 CREATE OR REPLACE PROCEDURE user1.prd_insert_update_admin(a_id integer, a_name character varying, a_sex character varying, a_tel character varying, a_email character varying, a_pwd character varying, a_cardid character varying, a_role character varying)
-AS 
+AS
 DECLARE
 	/*declaration_section*/
 	CURSOR cr_admin IS
 	SELECT adminid FROM admin WHERE adminId = a_id;
 	/*SELECT studentname, grade, major, clazz, institute, tel, eamil, pwd, cardid, sex, role FROM student WHERE studentId = stu_id;*/
 	id INTEGER;
-	
+
 BEGIN
   OPEN cr_admin;
   FETCH cr_admin INTO id;
   IF cr_admin%NOTFOUND THEN
-    INSERT INTO admin(adminname, sex, tel, eamil, pwd, cardId, role) 
+    INSERT INTO admin(adminname, sex, tel, eamil, pwd, cardId, role)
     VALUES(a_name, a_sex, a_tel, a_email, a_pwd, a_cardId, a_role);
-	ELSE 
+	ELSE
 	  UPDATE admin SET adminName=a_name, sex=a_sex, tel=a_tel, email=a_email, pwd=a_pwd, cardId=a_cardId, role=a_role
 	  WHERE adminId=a_id;
 	END IF;
@@ -148,7 +148,7 @@ END;
 -- Name: prd_insert_update_exam; Type: Function; Schema: user1;
 
 CREATE OR REPLACE PROCEDURE user1.prd_insert_update_exam(e_id integer, e_description character varying, e_source character varying, e_paperid integer, e_examdate character varying, e_totaltime integer, e_grade character varying, e_term character varying, e_major character varying, e_institute character varying, e_totalscore integer, e_type character varying, e_tips character varying)
-AS 
+AS
 DECLARE
 /*declaration_section*/
   CURSOR c_exam IS SELECT examCode
@@ -178,7 +178,7 @@ END;
 -- Name: prd_insert_update_message; Type: Function; Schema: user1;
 
 CREATE OR REPLACE PROCEDURE user1.prd_insert_update_message(m_id integer, m_title character varying, m_content character varying, m_time character varying)
-AS 
+AS
 DECLARE
   CURSOR c1 IS
 	SELECT id FROM message WHERE id = m_id;
@@ -201,7 +201,7 @@ END;
 -- Name: prd_insert_update_reply; Type: Function; Schema: user1;
 
 CREATE OR REPLACE PROCEDURE user1.prd_insert_update_reply(r_id integer, m_id integer, r_content character varying, r_time character varying)
-AS 
+AS
 DECLARE
   CURSOR c1 IS
 	SELECT replayid FROM replay WHERE replayid = r_id;
@@ -223,25 +223,25 @@ END;
 
 -- Name: prd_insert_update_student; Type: Function; Schema: user1;
 
-CREATE OR REPLACE PROCEDURE user1.prd_insert_update_student(stu_id integer, stu_name character varying, stu_grade character varying, stu_major character varying, stu_class character varying, stu_institute character varying, stu_tel character varying, stu_email character varying, stu_pwd character varying, stu_cardid character varying, stu_sex character varying, stu_role character varying, teacher_id integer)
-AS 
+CREATE OR REPLACE PROCEDURE user1.prd_insert_update_student(stu_id integer, stu_name character varying,stu_image character varying, stu_grade character varying, stu_major character varying, stu_class character varying, stu_institute character varying, stu_tel character varying, stu_email character varying, stu_pwd character varying, stu_cardid character varying, stu_sex character varying, stu_role character varying, teacher_id integer)
+AS
 DECLARE
 	/*declaration_section*/
 	CURSOR cr_stu1 IS
 	SELECT studentid FROM student WHERE studentId = stu_id;
 	/*SELECT studentname, grade, major, clazz, institute, tel, eamil, pwd, cardid, sex, role FROM student WHERE studentId = stu_id;*/
 	s_id INTEGER;
-	
+
 BEGIN
   OPEN cr_stu1;
   FETCH cr_stu1 INTO s_id;
   IF cr_stu1%NOTFOUND THEN
-    INSERT INTO student(studentname, grade, major, clazz, institute, tel, 
-                        email, pwd, cardid, sex, role, teacherid) 
-    VALUES(stu_name, stu_grade, stu_major, stu_class, stu_institute, stu_tel, 
+    INSERT INTO student(studentname, image, grade, major, clazz, institute, tel,
+                        email, pwd, cardid, sex, role, teacherid)
+    VALUES(stu_name, stu_image, stu_grade, stu_major, stu_class, stu_institute, stu_tel,
                         stu_email, stu_pwd, stu_cardId, stu_sex, stuVALUE, teacher_id);
-	ELSE 
-	  UPDATE student SET studentname=stu_name, grade=stu_grade, major=stu_major, clazz=stu_class, institute=stu_institute, tel=stu_tel,
+	ELSE
+	  UPDATE student SET studentname=stu_name, image=stu_image, grade=stu_grade, major=stu_major, clazz=stu_class, institute=stu_institute, tel=stu_tel,
 	  email=stu_email, pwd=stu_pwd, cardId=stu_cardId, sex=stu_sex, role=stu_role, teacherid=teacher_id
 	  WHERE studentId=stu_id;
 	END IF;
@@ -254,21 +254,21 @@ END;
 -- Name: prd_insert_update_teacher; Type: Function; Schema: user1;
 
 CREATE OR REPLACE PROCEDURE user1.prd_insert_update_teacher(t_id integer, t_name character varying, t_sex character varying, t_tel character varying, t_email character varying, t_pwd character varying, t_cardid character varying, t_role character varying, t_type character varying, t_institute character varying)
-AS 
+AS
 DECLARE
 	/*declaration_section*/
 	CURSOR c_tea IS
 	SELECT teacherid FROM teacher WHERE teacherId = t_id;
 	/*SELECT studentname, grade, major, clazz, institute, tel, eamil, pwd, cardid, sex, role FROM student WHERE studentId = stu_id;*/
 	id INTEGER;
-	
+
 BEGIN
   OPEN c_tea;
   FETCH c_tea INTO id;
   IF c_tea%NOTFOUND THEN
-    INSERT INTO teacher(teachername, sex, tel, email, pwd, cardId, role, type, institute) 
+    INSERT INTO teacher(teachername, sex, tel, email, pwd, cardId, role, type, institute)
     VALUES(t_name, t_sex, t_tel, t_email, t_pwd, t_cardId, t_role, t_type, t_institute);
-	ELSE 
+	ELSE
 	  UPDATE teacher SET teachername=t_name, sex=t_sex, tel=t_tel, email=t_email, pwd=t_pwd, cardId=t_cardId, role=t_role, type=t_type,
 	     institute=t_institute
 	  WHERE teacherId=t_id;
@@ -282,7 +282,7 @@ END;
 -- Name: prd_login_admin; Type: Function; Schema: user1;
 
 CREATE OR REPLACE PROCEDURE user1.prd_login_admin(user_id integer, user_pwd character varying, OUT uid integer, OUT uname character varying, OUT usex character varying, OUT utel character varying, OUT uemail character varying, OUT ucardid character varying, OUT urole character varying)
-AS 
+AS
 DECLARE
 /*declaration_section*/
   CURSOR a_cursor IS SELECT adminId, adminName, sex, tel, email, cardId, role
@@ -302,7 +302,7 @@ END;
 
 SET search_path = user1;
 CREATE TABLE admin (
-	adminid integer DEFAULT nextval('admin_adminid_seq'::regclass) NOT NULL,
+	adminid SERIAL PRIMARY KEYNOT NULL,
 	adminname character varying(20) DEFAULT NULL::character varying,
 	sex character varying(3) DEFAULT NULL::character varying,
 	tel character varying(11) DEFAULT NULL::character varying,
@@ -310,9 +310,7 @@ CREATE TABLE admin (
 	pwd character varying(32) DEFAULT NULL::character varying,
 	cardid character varying(18) DEFAULT NULL::character varying,
 	role character varying(1) DEFAULT NULL::character varying
-)
-WITH (orientation=row, compression=no);
-ALTER TABLE admin ADD CONSTRAINT admin_pkey PRIMARY KEY (adminid);
+);
 
 --Data for  Name: admin; Type: Table; Schema: user1;
 
@@ -324,7 +322,7 @@ INSERT INTO user1.admin (adminid,adminname,sex,tel,email,pwd,cardid,role)
 
 SET search_path = user1;
 CREATE TABLE exam_manage (
-	examcode integer DEFAULT nextval('exam_manage_examcode_seq'::regclass) NOT NULL,
+	examcode SERIAL PRIMARY KEY NOT NULL,
 	description character varying(50) DEFAULT NULL::character varying,
 	source character varying(20) DEFAULT NULL::character varying,
 	paperid integer,
@@ -339,7 +337,6 @@ CREATE TABLE exam_manage (
 	tips character varying(255) DEFAULT NULL::character varying
 )
 WITH (orientation=row, compression=no);
-ALTER TABLE exam_manage ADD CONSTRAINT exam_manage_pkey PRIMARY KEY (examcode);
 
 --Data for  Name: exam_manage; Type: Table; Schema: user1;
 
@@ -367,7 +364,7 @@ INSERT INTO user1.exam_manage (examcode,description,source,paperid,examdate,tota
 
 SET search_path = user1;
 CREATE TABLE fill_question (
-	questionid integer DEFAULT nextval('fill_question_questionid_seq'::regclass) NOT NULL,
+	questionid SERIAL PRIMARY KEY NOT NULL,
 	subject character varying(20) DEFAULT NULL::character varying,
 	question character varying(255) DEFAULT NULL::character varying,
 	answer character varying(255) DEFAULT NULL::character varying,
@@ -377,7 +374,6 @@ CREATE TABLE fill_question (
 	section character varying(20) DEFAULT NULL::character varying
 )
 WITH (orientation=row, compression=no);
-ALTER TABLE fill_question ADD CONSTRAINT fill_question_pkey PRIMARY KEY (questionid);
 
 --Data for  Name: fill_question; Type: Table; Schema: user1;
 
@@ -445,7 +441,7 @@ INSERT INTO user1.fill_question (questionid,subject,question,answer,analysis,sco
 
 SET search_path = user1;
 CREATE TABLE judge_question (
-	questionid integer DEFAULT nextval('judge_question_questionid_seq'::regclass) NOT NULL,
+	questionid SERIAL PRIMARY KEY NOT NULL,
 	subject character varying(20) DEFAULT NULL::character varying,
 	question character varying(255) DEFAULT NULL::character varying,
 	answer character varying(255) DEFAULT NULL::character varying,
@@ -455,7 +451,6 @@ CREATE TABLE judge_question (
 	section character varying(20) DEFAULT NULL::character varying
 )
 WITH (orientation=row, compression=no);
-ALTER TABLE judge_question ADD CONSTRAINT judge_question_pkey PRIMARY KEY (questionid);
 
 --Data for  Name: judge_question; Type: Table; Schema: user1;
 
@@ -489,13 +484,12 @@ INSERT INTO user1.judge_question (questionid,subject,question,answer,analysis,sc
 
 SET search_path = user1;
 CREATE TABLE message (
-	id integer DEFAULT nextval('message_id_seq'::regclass) NOT NULL,
+	id SERIAL PRIMARY KEY NOT NULL,
 	title character varying(50) DEFAULT NULL::character varying,
 	content character varying(255) DEFAULT NULL::character varying,
 	"time" timestamp(0) without time zone DEFAULT NULL::timestamp without time zone
 )
 WITH (orientation=row, compression=no);
-ALTER TABLE message ADD CONSTRAINT message_pkey PRIMARY KEY (id);
 
 --Data for  Name: message; Type: Table; Schema: user1;
 
@@ -525,7 +519,7 @@ INSERT INTO user1.message (id,title,content,time)
 
 SET search_path = user1;
 CREATE TABLE multi_question (
-	questionid integer DEFAULT nextval('multi_question_questionid_seq'::regclass) NOT NULL,
+	questionid SERIAL PRIMARY KEY NOT NULL,
 	subject character varying(20) DEFAULT NULL::character varying,
 	question character varying(255) DEFAULT NULL::character varying,
 	answera character varying(255) DEFAULT NULL::character varying,
@@ -539,7 +533,6 @@ CREATE TABLE multi_question (
 	level character varying(1) DEFAULT NULL::character varying
 )
 WITH (orientation=row, compression=no);
-ALTER TABLE multi_question ADD CONSTRAINT multi_question_pkey PRIMARY KEY (questionid);
 
 --Data for  Name: multi_question; Type: Table; Schema: user1;
 
@@ -708,12 +701,11 @@ INSERT INTO user1.paper_manage (paperid,questiontype,questionid)
 SET search_path = user1;
 CREATE TABLE replay (
 	messageid integer,
-	replayid integer DEFAULT nextval('replay_replayid_seq'::regclass) NOT NULL,
+	replayid SERIAL PRIMARY KEY NOT NULL,
 	replay character varying(255) DEFAULT NULL::character varying,
 	replaytime timestamp(0) without time zone DEFAULT NULL::timestamp without time zone
 )
 WITH (orientation=row, compression=no);
-ALTER TABLE replay ADD CONSTRAINT replay_pkey PRIMARY KEY (replayid);
 
 --Data for  Name: replay; Type: Table; Schema: user1;
 
@@ -753,7 +745,7 @@ INSERT INTO user1.replay (messageid,replayid,replay,replaytime)
 
 SET search_path = user1;
 CREATE TABLE score (
-	scoreid integer DEFAULT nextval('score_scoreid_seq'::regclass) NOT NULL,
+	scoreid SERIAL PRIMARY KEY NOT NULL,
 	examcode integer,
 	studentid integer,
 	subject character varying(20) NOT NULL,
@@ -763,7 +755,6 @@ CREATE TABLE score (
 	answerdate character varying(10) DEFAULT NULL::character varying
 )
 WITH (orientation=row, compression=no);
-ALTER TABLE score ADD CONSTRAINT score_pkey PRIMARY KEY (scoreid);
 
 --Data for  Name: score; Type: Table; Schema: user1;
 
@@ -803,8 +794,9 @@ INSERT INTO user1.score (scoreid,examcode,studentid,subject,ptscore,etscore,scor
 
 SET search_path = user1;
 CREATE TABLE student (
-	studentid integer DEFAULT nextval('student_studentid_seq'::regclass) NOT NULL,
+	studentid SERIAL PRIMARY KEY NOT NULL,
 	studentname character varying(20) DEFAULT NULL::character varying,
+	image character varying(100) DEFAULT NULL::character varying,
 	grade character varying(4) DEFAULT NULL::character varying,
 	major character varying(50) DEFAULT NULL::character varying,
 	clazz character varying(10) DEFAULT NULL::character varying,
@@ -819,27 +811,26 @@ CREATE TABLE student (
     CONSTRAINT fk_teacherid FOREIGN KEY (teacherid) REFERENCES teacher(teacherid)
 )
 WITH (orientation=row, compression=no);
-ALTER TABLE student ADD CONSTRAINT student_pkey PRIMARY KEY (studentid);
 
 --Data for  Name: student; Type: Table; Schema: user1;
 
-INSERT INTO user1.student (studentid,studentname,grade,major,clazz,institute,tel,email,pwd,cardid,sex,role,teacherid)
- VALUES (20154084,'大咸鱼','2015','计算机科学与技术','2','软件工程学院','13658377857','13658377857@sina.cn','E10ADC3949BA59ABBE56E057F20F883E','124123124535','男','2',null);
-INSERT INTO user1.student (studentid,studentname,grade,major,clazz,institute,tel,email,pwd,cardid,sex,role,teacherid)
- VALUES (20155003,'张大宝','2015','信息工程','1','软件工程学院','15583829425','15583829425@163.com','E10ADC3949BA59ABBE56E057F20F883E','3242342','男','2',null);
-INSERT INTO user1.student (studentid,studentname,grade,major,clazz,institute,tel,email,pwd,cardid,sex,role,teacherid)
- VALUES (20155008,'小王','2015','信息工程','2','软件工程学院','15523619564','15523619564@163.com','E10ADC3949BA59ABBE56E057F20F883E','500234199704022353','男','2',null);
-INSERT INTO user1.student (studentid,studentname,grade,major,clazz,institute,tel,email,pwd,cardid,sex,role,teacherid)
- VALUES (20155007,'翠花','2015','网络工程','1','软件学院','18734538457','18734538457@163.com','E10ADC3949BA59ABBE56E057F20F883E','2423423','女','2',null);
-INSERT INTO user1.student (studentid,studentname,grade,major,clazz,institute,tel,email,pwd,cardid,sex,role,teacherid)
- VALUES (20154001,'隔壁老王','2015','计算机科学与技术','2','软件学院','13585439532','gblw@163.com','E10ADC3949BA59ABBE56E057F20F883E','3412312','男','2',null);
+INSERT INTO user1.student (studentid,studentname,image,grade,major,clazz,institute,tel,email,pwd,cardid,sex,role,teacherid)
+ VALUES (20154084,'大咸鱼','','2015','计算机科学与技术','2','软件工程学院','13658377857','13658377857@sina.cn','E10ADC3949BA59ABBE56E057F20F883E','124123124535','男','2',null);
+INSERT INTO user1.student (studentid,studentname,image,grade,major,clazz,institute,tel,email,pwd,cardid,sex,role,teacherid)
+ VALUES (20155003,'张大宝','','2015','信息工程','1','软件工程学院','15583829425','15583829425@163.com','E10ADC3949BA59ABBE56E057F20F883E','3242342','男','2',null);
+INSERT INTO user1.student (studentid,studentname,image,grade,major,clazz,institute,tel,email,pwd,cardid,sex,role,teacherid)
+ VALUES (20155008,'小王','','2015','信息工程','2','软件工程学院','15523619564','15523619564@163.com','E10ADC3949BA59ABBE56E057F20F883E','500234199704022353','男','2',null);
+INSERT INTO user1.student (studentid,studentname,image,grade,major,clazz,institute,tel,email,pwd,cardid,sex,role,teacherid)
+ VALUES (20155007,'翠花','','2015','网络工程','1','软件学院','18734538457','18734538457@163.com','E10ADC3949BA59ABBE56E057F20F883E','2423423','女','2',null);
+INSERT INTO user1.student (studentid,studentname,image,grade,major,clazz,institute,tel,email,pwd,cardid,sex,role,teacherid)
+ VALUES (20154001,'隔壁老王','','2015','计算机科学与技术','2','软件学院','13585439532','gblw@163.com','E10ADC3949BA59ABBE56E057F20F883E','3412312','男','2',null);
 
 
 -- Name: teacher; Type: Table; Schema: user1;
 
 SET search_path = user1;
 CREATE TABLE teacher (
-	teacherid integer DEFAULT nextval('teacher_teacherid_seq'::regclass) NOT NULL,
+	teacherid SERIAL PRIMARY KEY NOT NULL,
 	teachername character varying(20) DEFAULT NULL::character varying,
 	institute character varying(20) DEFAULT NULL::character varying,
 	sex character varying(3) DEFAULT NULL::character varying,
@@ -851,7 +842,6 @@ CREATE TABLE teacher (
 	role character varying(1) DEFAULT NULL::character varying
 )
 WITH (orientation=row, compression=no);
-ALTER TABLE teacher ADD CONSTRAINT teacher_pkey PRIMARY KEY (teacherid);
 
 --Data for  Name: teacher; Type: Table; Schema: user1;
 
@@ -859,194 +849,3 @@ INSERT INTO user1.teacher (teacherid,teachername,institute,sex,tel,email,pwd,car
  VALUES (20081001,'张','软件工程学院','男','13598458442','13598458442@163.com','E10ADC3949BA59ABBE56E057F20F883E','423423283498','讲师','1');
 INSERT INTO user1.teacher (teacherid,teachername,institute,sex,tel,email,pwd,cardid,type,role)
  VALUES (20081002,'王大志','软件工程学院','男','1231221312','1231221312@163.com','E10ADC3949BA59ABBE56E057F20F883E','24241234','讲师','1');
-
-
--- Name: admin_adminid_seq; Type: SEQUENCE OWNED BY ; Schema: user1;
-
-ALTER SEQUENCE admin_adminid_seq OWNED BY admin.adminid ;
-
--- Name: exam_manage_examcode_seq; Type: SEQUENCE OWNED BY ; Schema: user1;
-
-ALTER SEQUENCE exam_manage_examcode_seq OWNED BY exam_manage.examcode ;
-
--- Name: fill_question_questionid_seq; Type: SEQUENCE OWNED BY ; Schema: user1;
-
-ALTER SEQUENCE fill_question_questionid_seq OWNED BY fill_question.questionid ;
-
--- Name: judge_question_questionid_seq; Type: SEQUENCE OWNED BY ; Schema: user1;
-
-ALTER SEQUENCE judge_question_questionid_seq OWNED BY judge_question.questionid ;
-
--- Name: message_id_seq; Type: SEQUENCE OWNED BY ; Schema: user1;
-
-ALTER SEQUENCE message_id_seq OWNED BY message.id ;
-
--- Name: multi_question_questionid_seq; Type: SEQUENCE OWNED BY ; Schema: user1;
-
-ALTER SEQUENCE multi_question_questionid_seq OWNED BY multi_question.questionid ;
-
--- Name: replay_replayid_seq; Type: SEQUENCE OWNED BY ; Schema: user1;
-
-ALTER SEQUENCE replay_replayid_seq OWNED BY replay.replayid ;
-
--- Name: score_scoreid_seq; Type: SEQUENCE OWNED BY ; Schema: user1;
-
-ALTER SEQUENCE score_scoreid_seq OWNED BY score.scoreid ;
-
--- Name: student_studentid_seq; Type: SEQUENCE OWNED BY ; Schema: user1;
-
-ALTER SEQUENCE student_studentid_seq OWNED BY student.studentid ;
-
--- Name: teacher_teacherid_seq; Type: SEQUENCE OWNED BY ; Schema: user1;
-
-ALTER SEQUENCE teacher_teacherid_seq OWNED BY teacher.teacherid ;
-
--- Name: admin_adminid_seq; Type: Sequence; Schema: user1;
-
-
-SET search_path = user1 ;
- CREATE  SEQUENCE admin_adminid_seq
- START  WITH  1
- INCREMENT  BY  1
- NO MINVALUE  
- MAXVALUE 9223372036854775807
- CACHE 1;
-
---Data for  Name: admin_adminid_seq; Type: Sequence; Schema: user1;
-
-SELECT pg_catalog.setVal('admin_adminid_seq',1,false);
-
--- Name: exam_manage_examcode_seq; Type: Sequence; Schema: user1;
-
-
-SET search_path = user1 ;
- CREATE  SEQUENCE exam_manage_examcode_seq
- START  WITH  1
- INCREMENT  BY  1
- NO MINVALUE  
- MAXVALUE 9223372036854775807
- CACHE 1;
-
---Data for  Name: exam_manage_examcode_seq; Type: Sequence; Schema: user1;
-
-SELECT pg_catalog.setVal('exam_manage_examcode_seq',1,false);
-
--- Name: fill_question_questionid_seq; Type: Sequence; Schema: user1;
-
-
-SET search_path = user1 ;
- CREATE  SEQUENCE fill_question_questionid_seq
- START  WITH  1
- INCREMENT  BY  1
- NO MINVALUE  
- MAXVALUE 9223372036854775807
- CACHE 1;
-
---Data for  Name: fill_question_questionid_seq; Type: Sequence; Schema: user1;
-
-SELECT pg_catalog.setVal('fill_question_questionid_seq',1,false);
-
--- Name: judge_question_questionid_seq; Type: Sequence; Schema: user1;
-
-
-SET search_path = user1 ;
- CREATE  SEQUENCE judge_question_questionid_seq
- START  WITH  1
- INCREMENT  BY  1
- NO MINVALUE  
- MAXVALUE 9223372036854775807
- CACHE 1;
-
---Data for  Name: judge_question_questionid_seq; Type: Sequence; Schema: user1;
-
-SELECT pg_catalog.setVal('judge_question_questionid_seq',1,false);
-
--- Name: message_id_seq; Type: Sequence; Schema: user1;
-
-
-SET search_path = user1 ;
- CREATE  SEQUENCE message_id_seq
- START  WITH  1
- INCREMENT  BY  1
- NO MINVALUE  
- MAXVALUE 9223372036854775807
- CACHE 1;
-
---Data for  Name: message_id_seq; Type: Sequence; Schema: user1;
-
-SELECT pg_catalog.setVal('message_id_seq',1,false);
-
--- Name: multi_question_questionid_seq; Type: Sequence; Schema: user1;
-
-
-SET search_path = user1 ;
- CREATE  SEQUENCE multi_question_questionid_seq
- START  WITH  1
- INCREMENT  BY  1
- NO MINVALUE  
- MAXVALUE 9223372036854775807
- CACHE 1;
-
---Data for  Name: multi_question_questionid_seq; Type: Sequence; Schema: user1;
-
-SELECT pg_catalog.setVal('multi_question_questionid_seq',1,false);
-
--- Name: replay_replayid_seq; Type: Sequence; Schema: user1;
-
-
-SET search_path = user1 ;
- CREATE  SEQUENCE replay_replayid_seq
- START  WITH  1
- INCREMENT  BY  1
- NO MINVALUE  
- MAXVALUE 9223372036854775807
- CACHE 1;
-
---Data for  Name: replay_replayid_seq; Type: Sequence; Schema: user1;
-
-SELECT pg_catalog.setVal('replay_replayid_seq',1,false);
-
--- Name: score_scoreid_seq; Type: Sequence; Schema: user1;
-
-
-SET search_path = user1 ;
- CREATE  SEQUENCE score_scoreid_seq
- START  WITH  1
- INCREMENT  BY  1
- NO MINVALUE  
- MAXVALUE 9223372036854775807
- CACHE 1;
-
---Data for  Name: score_scoreid_seq; Type: Sequence; Schema: user1;
-
-SELECT pg_catalog.setVal('score_scoreid_seq',1,false);
-
--- Name: student_studentid_seq; Type: Sequence; Schema: user1;
-
-
-SET search_path = user1 ;
- CREATE  SEQUENCE student_studentid_seq
- START  WITH  1
- INCREMENT  BY  1
- NO MINVALUE  
- MAXVALUE 9223372036854775807
- CACHE 1;
-
---Data for  Name: student_studentid_seq; Type: Sequence; Schema: user1;
-
-SELECT pg_catalog.setVal('student_studentid_seq',1,false);
-
--- Name: teacher_teacherid_seq; Type: Sequence; Schema: user1;
-
-
-SET search_path = user1 ;
- CREATE  SEQUENCE teacher_teacherid_seq
- START  WITH  1
- INCREMENT  BY  1
- NO MINVALUE  
- MAXVALUE 9223372036854775807
- CACHE 1;
-
---Data for  Name: teacher_teacherid_seq; Type: Sequence; Schema: user1;
-
-SELECT pg_catalog.setVal('teacher_teacherid_seq',1,false);

@@ -28,5 +28,3 @@ spring:
       min-idle: 10        #最小连接数
       max-active: 20      #最大连接数
       max-wait: 60000     #获取连接时的最大等待时间
-
-

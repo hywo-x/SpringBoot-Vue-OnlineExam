@@ -25,10 +25,10 @@ public class Student {
 
     @ColumnWidth(20)
     @ExcelProperty("年级")
-
-    private String image;
-
     private String grade;
+
+    @ExcelIgnore
+    private String image;
 
     @ColumnWidth(20)
     @ExcelProperty("专业")
